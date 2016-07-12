@@ -1,0 +1,25 @@
+MOV G #5
+MOV H #4
+MOV D G
+SUB H G			// H - G
+JRZ #18			// if H - G == 0 -> H == G, Ende
+JRN #11			// if H - G < 0, springe zu Zeile 18 für switch
+SUB A G			// sub größere Zahl vom Ergebnis
+JRZ #15			// if 0, G == kgmv, Ende
+JRN #5			// if A - G < 0, springe zu Zeile 15
+JMP @6			// else wiederhole Schleife
+SUB A H
+JRZ #11
+JRN #1
+JMP @10
+ADD G D			// zähle zu G D hinzu
+MOV D A
+JMP @10
+PUSH G			// if H > G, switch
+PUSH H
+POP G
+POP H
+MOV D G
+JMP @6			// move Resultat in A
+MOV A D
+HALT

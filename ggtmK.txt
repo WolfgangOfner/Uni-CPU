@@ -1,0 +1,35 @@
+MOV B #100
+MOV C #70
+MOV E #1
+MOV D B
+MOV H C
+MOV G B
+SUB C B
+JRZ #25				// wenn C - B == 0, Ende
+JRN #19				// wenn C - B < 0 --> springe zu Zeile 29 und vertausche B und C
+SUB A B				// B vom Ergebnis abziehen
+JRZ #22				// if 0 --> B == ggt, Ende
+JRN #11				 
+JMP @9				// wiederholen, falls Ergebnis > 0
+SUB G D
+MOV G A
+JRZ #2
+JRN #6
+JMP @13
+SUB H D
+MOV H A
+JRZ #12
+JRN #1
+JMP @18
+SUB D E			// D--
+MOV D A			
+MOV G B			
+MOV H C
+JMP @13			// wiederhole Schritte
+PUSH B			// B und C vertauschen damit B > C
+PUSH C
+POP B
+POP C
+JMP @3
+MOV A D
+HALT
